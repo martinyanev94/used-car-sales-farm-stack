@@ -1,0 +1,9 @@
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
+
+COPY ./app /app
+
+# Install required packages
+COPY ./requirements.txt /app/
+RUN pip install --no-cache-dir -r /app/requirements.txt
+docker build -t fastapi-app .
+docker run -d -p 8000:80 fastapi-app
