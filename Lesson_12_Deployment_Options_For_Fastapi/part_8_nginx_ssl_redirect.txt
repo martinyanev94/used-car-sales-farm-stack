@@ -1,0 +1,18 @@
+server {
+    listen 80;
+    server_name your_domain.com;
+    return 301 https://$host$request_uri;  # Redirect HTTP to HTTPS
+}
+
+server {
+    listen 443 ssl;
+    server_name your_domain.com;
+
+    ssl_certificate /path/to/certificate.crt;
+    ssl_certificate_key /path/to/private.key;
+
+    location / {
+        proxy_pass http://localhost:8000;
+        # Other proxy headers...
+    }
+}
